@@ -13,5 +13,8 @@
     "https"
   ],
   "author": "hazratgs",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "url-parse": "^1.1.9"
+  }
 }
