@@ -4,6 +4,7 @@ downloader('https://scontent.cdninstagram.com/t51.2885-15/e35/18888672_131821212
     path: ''
 }).then(res => {
     console.log(res)
+    console.log('Успешно выполнено')
 }).catch(err => {
-    console.log(err)
+    throw new Error(err)
 })
