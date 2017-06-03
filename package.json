@@ -1,0 +1,17 @@
+{
+  "name": "download-file-random",
+  "version": "1.0.0",
+  "description": "Модуль для загрузки файла по URL и сохранению в options.path директорию",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "download",
+    "random",
+    "name",
+    "https"
+  ],
+  "author": "hazratgs",
+  "license": "ISC"
+}
