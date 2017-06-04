@@ -1,6 +1,6 @@
 {
   "name": "download-file-random",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Модуль для загрузки файла по URL и сохранению в options.path директорию",
   "main": "index.js",
   "scripts": {
