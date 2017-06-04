@@ -5,7 +5,14 @@ const urlParse = require('url-parse');
 const md5 = require('md5');
 const resolve = require('path').resolve;
 
-module.exports = (url, options) => {
+module.exports = (urls, options) => {
+
+    // Если передан только 1 параметр в виде строки,
+    // преобразуем его в массив
+    if (typeof urls === String){
+        urls = [urls];
+    }
+    
     let parse = urlParse(url);
 
     // Тип файла
