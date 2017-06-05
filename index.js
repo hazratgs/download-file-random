@@ -14,7 +14,7 @@ const download = async (url, options) => {
     let type = parse.pathname.split('.');
 
     // Имя файла
-    let name = !options.name ? md5(new Date()) + '.' + type[type.length - 1] : options.name;
+    let name = !options.name ? md5(process.hrtime()) + '.' + type[type.length - 1] : options.name;
 
     // Дириктория, куда будет сохранен файл
     let fileStream = fs.createWriteStream(resolve() + options.path + name);
