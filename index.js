@@ -5,17 +5,12 @@ const urlParse = require('url-parse');
 const md5 = require('md5');
 const resolve = require('path').resolve;
 
-module.exports = (urls, options) => {
+module.exports = async (items, options) =>
+    await Promise.all(items.map(item => download(item, options)));
 
-    // Если передан только 1 параметр в виде строки,
-    // преобразуем его в массив
-    if (typeof urls === String){
-        urls = [urls];
-    }
-    
+// Асинхронная загрузка файлов
+const download = async (url, options) => {
     let parse = urlParse(url);
-
-    // Тип файла
     let type = parse.pathname.split('.');
 
     // Имя файла
@@ -24,26 +19,16 @@ module.exports = (urls, options) => {
     // Дириктория, куда будет сохранен файл
     let fileStream = fs.createWriteStream(resolve() + options.path + name);
 
-    // Загружаем файл
-    return new Promise((resolve, reject) => {
+    // Определяем тип протокала, по умолчанию http
+    const protocol = parse.protocol === 'https:' ? https : http;
 
-        // Определяем протокол соединения
-        if (parse.protocol === 'https:'){
-            https.get(url, response => {
-                response.pipe(fileStream);
+    // Возвращаем промис загрузки файла
+    return new Promise(resolve => {
+        protocol.get(url, res => {
+            res.pipe(fileStream);
 
-                // На выход отдаем название файла
-                resolve(name)
-            })
-        } else if (parse.protocol === 'http:'){
-            http.get(url, response => {
-                response.pipe(fileStream);
-
-                // На выход отдаем название файла
-                resolve(name)
-            })
-        } else {
-            reject('Ошибка, не определен протокол соединения')
-        }
+            // Возвращаем название файла
+            resolve(name)
+        })
     });
 };

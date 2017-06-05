@@ -1,10 +1,13 @@
 const downloader = require('../index');
 
-downloader('https://scontent.cdninstagram.com/t51.2885-15/e35/18888672_1318212121630783_2222031790493663232_n.jpg', {
-    path: ''
-}).then(res => {
-    console.log(res)
-    console.log('Успешно выполнено')
-}).catch(err => {
-    throw new Error(err)
-})
+const f = async () => {
+    let list = await downloader([
+        'http://febox.ru/public/img/news/small/7cbbc409ec990f19c78c75bd1e06f215.jpg',
+        'https://cardo-ua.com/2543-8318-mobile_prod/plate-febox-djinsovogo-tsveta-print-tsvety-leto-2016.jpg'
+    ], {
+        path: '/'
+    });
+    console.log(list)
+};
+
+f(); 
