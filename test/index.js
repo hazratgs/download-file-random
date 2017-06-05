@@ -1,13 +1,24 @@
+const assert = require('assert');
 const downloader = require('../index');
 
-const f = async () => {
-    let list = await downloader([
-        'http://febox.ru/public/img/news/small/7cbbc409ec990f19c78c75bd1e06f215.jpg',
-        'https://cardo-ua.com/2543-8318-mobile_prod/plate-febox-djinsovogo-tsveta-print-tsvety-leto-2016.jpg'
-    ], {
-        path: '/'
-    });
-    console.log(list)
-};
+const files = [
+    'https://s3.amazonaws.com/media-p.slid.es/uploads/alexanderfarennikov/images/1198519/reactjs.png',
+    'https://facebook.github.io/react/img/logo_og.png'
+];
 
-f(); 
+
+describe('Downloader', () => {
+    it('Загружаем несколько файлов', (done) => {
+        downloader(files, { path: '/test/' })
+            .then(result => {
+                done()
+            })
+    });
+
+    it('Загружаем один файл', (done) => {
+        downloader(['https://facebook.github.io/react/img/logo_og.png'], { path: '/test/' })
+            .then(result => {
+                done()
+            })
+    });
+});
